@@ -32,17 +32,17 @@ import com.google.gson.GsonBuilder;
 public class BRPService implements Serializable {  
 	private static final String GET_ATTACHMENT_BODY_PATH = "GetAttachmentBody";
 	private static final String POST_RESPONSE_SF_PATH = "BRPResponse";	
-	private BRPFileDetailWrapper brpFileDetailObj;
+	private static BRPFileDetailWrapper brpFileDetailObj;
 	
 	private static final Header PRETTY_PRINT_HEADER = new BasicHeader("X-PrettyPrint", "1");
-	private Header OAUTH_HEADER;
-	private String LOGIN_INSTANCE_URL;
-	private String LOGIN_ACCESS_TOKEN;
+	private static Header OAUTH_HEADER;
+	private static String LOGIN_INSTANCE_URL;
+	private static String LOGIN_ACCESS_TOKEN;
 	
-	private BRPResponseWrapper brpResponseObj;
+	private static BRPResponseWrapper brpResponseObj;
 	
-	private String BP_USERNAME;// = "nidhi.sharma@bp.dev04.com";
-	private String BP_PASSWORD;// = "Welcome@1234";
+	private static String BP_USERNAME;// = "nidhi.sharma@bp.dev04.com";
+	private static String BP_PASSWORD;// = "Welcome@1234";
 	
 	public BRPService() throws Exception {
 	}
@@ -64,7 +64,7 @@ public class BRPService implements Serializable {
 		BP_PASSWORD = sfPassword.replace("#","%23");	
 		
 		System.out.println("BP_USERNAME :" + BP_USERNAME + " and BP_PASSWORD : " + BP_PASSWORD);
-		Map<String, String> authorizationDataMap = new AuthorizationUtil().getAuthorizationToken(BP_USERNAME, BP_PASSWORD);
+		Map<String, String> authorizationDataMap = AuthorizationUtil.getAuthorizationToken(BP_USERNAME, BP_PASSWORD);
 		LOGIN_ACCESS_TOKEN = authorizationDataMap.get("LOGIN_ACCESS_TOKEN");
 		LOGIN_INSTANCE_URL = authorizationDataMap.get("LOGIN_INSTANCE_URL");
 		OAUTH_HEADER = new BasicHeader("Authorization", "OAuth " + LOGIN_ACCESS_TOKEN);
@@ -117,7 +117,7 @@ public class BRPService implements Serializable {
 		doPostToSF(brpFileDetailObj.Namespace + POST_RESPONSE_SF_PATH, requestJson.toString());
 	}
 	
-	private void deleteFile() {
+	private static void deleteFile() {
 		String folderName = "."; // Give your folderName
 		File[] listFiles = new File(folderName).listFiles();
 		
@@ -132,7 +132,7 @@ public class BRPService implements Serializable {
 		}
 	}
 	
-	public String compress(String str) throws IOException {
+	public static String compress(String str) throws IOException {
 	    ByteArrayOutputStream os = new ByteArrayOutputStream(str.length());
 	    GZIPOutputStream gos = new GZIPOutputStream(os);
 	    gos.write(str.getBytes("UTF-8"));
@@ -184,7 +184,7 @@ public class BRPService implements Serializable {
 		return responseStr;
 	}
 	
-	private void createFileHeader() {
+	private static void createFileHeader() {
 		String header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+
 				"<star:ProcessPartsInventory releaseID=\"5.8.1\" languageCode=\"en-US\" xsi:schemaLocation=\"http://www.starstandard.org/STAR/5 file:/C:/STAR/5.8.1/BODs/Standalone/ProcessPartsInventory.xsd\" xmlns:star=\"http://www.starstandard.org/STAR/5\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" +
 				"<star:ApplicationArea>" +
@@ -205,12 +205,12 @@ public class BRPService implements Serializable {
 				"<star:InventoryTypeCode>Full</star:InventoryTypeCode></star:PartsInventoryHeader>";
 		writeUsingFileWriter(header);
     }
-	private void createFileFooter() {
+	private static void createFileFooter() {
 		String footer = "</star:PartsInventory></star:ProcessPartsInventoryDataArea></star:ProcessPartsInventory>";
 		writeUsingFileWriter(footer);
     }
 	
-	private void writeUsingFileWriter(String data) {
+	private static void writeUsingFileWriter(String data) {
         File file = new File(brpFileDetailObj.FileName);
         FileWriter fr = null;
         try {

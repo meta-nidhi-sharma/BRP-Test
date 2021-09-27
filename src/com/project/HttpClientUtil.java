@@ -15,7 +15,7 @@ public class HttpClientUtil {
 	 * @return
 	 * @throws Exception 
 	 */
-	public String doLogin(final String loginURL) throws Exception {
+	public static String doLogin(final String loginURL) throws Exception {
 		HttpClient httpclient = HttpClientBuilder.create().build();
 		HttpPost httpPost = new HttpPost(loginURL);
 		String responseStr = null;
