@@ -32,7 +32,7 @@ public class AuthorizationUtil {
 	 * 
 	 * @return
 	 */
-	private static boolean isValidConfiguration() {
+	private boolean isValidConfiguration() {
 		if (BP_SECRET != null 
 				&& BP_CLIENT_ID != null 
 				&& BP_CLIENT_SECRET != null) {
@@ -49,7 +49,7 @@ public class AuthorizationUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static Map<String, String> getAuthorizationToken(String bpUsername, String bpPassword) throws Exception {
+	public Map<String, String> getAuthorizationToken(String bpUsername, String bpPassword) throws Exception {
 
 		Map<String, String> authorizationDataMap = new HashMap<String, String>();
 		try {
@@ -58,7 +58,7 @@ public class AuthorizationUtil {
 				String loginURL = BP_LOGIN_URL + BP_GRANT_SERVICE + "&client_id=" + BP_CLIENT_ID + "&client_secret="
 						+ BP_CLIENT_SECRET + "&username=" + bpUsername + "&password=" + (bpPassword + BP_SECRET);
 
-				String responseData = HttpClientUtil.doLogin(loginURL);
+				String responseData = new HttpClientUtil().doLogin(loginURL);
 				System.out.println("HttpResponse " + responseData.toString());
 				if (responseData != null) {
 					JSONObject jsonObject = null;
