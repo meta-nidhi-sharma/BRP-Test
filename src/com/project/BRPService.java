@@ -102,7 +102,6 @@ public class BRPService implements Serializable {
 			System.out.println("Payload created");
 			String requestbody = new String(Files.readAllBytes(Paths.get(brpFileDetailObj.FileName)));
 			doPostToBRP(requestbody);
-			throw new Exception("Failed to deliver synchronous message: senderChannel Catching exception calling messaging system: XIServer:CX_ID_PLSRV");
 		} catch (Exception e) {
 			brpResponseObj.ErrorResponse = e.getMessage();
 			brpResponseObj.IsJavaSuccess = false;
@@ -250,14 +249,15 @@ public class BRPService implements Serializable {
 			httpPost.setEntity(body);
 			body = null;
 			HttpResponse response = httpClient.execute(httpPost);
-
+			if(!brpFileDetailObj.IsRetryFilePosting) {
+				throw new Exception("Failed to deliver synchronous message: senderChannel 'fb297c8c8bf63dd0abef39e19d7627fa': Catching exception calling messaging system: XIServer:CX_ID_PLSRV: (Software version: 1.0.25)" );
+			}
 			int statusCode = response.getStatusLine().getStatusCode();
 			responseStr = EntityUtils.toString(response.getEntity());
-			throw new Exception("Failed to deliver synchronous message: senderChannel Catching exception calling messaging system: XIServer:CX_ID_PLSRV");
-			/**System.out.print("Status Code  " + statusCode);
+			System.out.print("Status Code  " + statusCode);
 			brpResponseObj.StatusCode = statusCode;
 			brpResponseObj.ResponseXMLString = responseStr;
-			brpResponseObj.IsJavaSuccess = true;**/
+			brpResponseObj.IsJavaSuccess = true;
 		} catch (Exception e) {
 			brpResponseObj.ErrorResponse = e.getMessage();
 			brpResponseObj.IsJavaSuccess = false;
