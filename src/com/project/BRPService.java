@@ -103,7 +103,6 @@ public class BRPService implements Serializable {
 			String requestbody = new String(Files.readAllBytes(Paths.get(brpFileDetailObj.FileName)));
 			doPostToBRP(requestbody);
 			throw new Exception("Failed to deliver synchronous message: senderChannel Catching exception calling messaging system: XIServer:CX_ID_PLSRV");
-
 		} catch (Exception e) {
 			brpResponseObj.ErrorResponse = e.getMessage();
 			brpResponseObj.IsJavaSuccess = false;
@@ -255,10 +254,10 @@ public class BRPService implements Serializable {
 			int statusCode = response.getStatusLine().getStatusCode();
 			responseStr = EntityUtils.toString(response.getEntity());
 			throw new Exception("Failed to deliver synchronous message: senderChannel Catching exception calling messaging system: XIServer:CX_ID_PLSRV");
-			//System.out.print("Status Code  " + statusCode);
-			//brpResponseObj.StatusCode = statusCode;
-			//brpResponseObj.ResponseXMLString = responseStr;
-			//brpResponseObj.IsJavaSuccess = true;
+			/**System.out.print("Status Code  " + statusCode);
+			brpResponseObj.StatusCode = statusCode;
+			brpResponseObj.ResponseXMLString = responseStr;
+			brpResponseObj.IsJavaSuccess = true;**/
 		} catch (Exception e) {
 			brpResponseObj.ErrorResponse = e.getMessage();
 			brpResponseObj.IsJavaSuccess = false;
