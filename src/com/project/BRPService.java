@@ -252,7 +252,7 @@ public class BRPService implements Serializable {
 
 			int statusCode = response.getStatusLine().getStatusCode();
 			responseStr = EntityUtils.toString(response.getEntity());
-			throw new Exception("Failed to deliver synchronous message: senderChannel 'fb297c8c8bf63dd0abef39e19d7627fa': Catching exception calling messaging system: XIServer:CX_ID_PLSRV: (Software version: 1.0.25)");
+			throw new Exception("Failed to deliver synchronous message: senderChannel Catching exception calling messaging system: XIServer:CX_ID_PLSRV");
 			//System.out.print("Status Code  " + statusCode);
 			//brpResponseObj.StatusCode = statusCode;
 			//brpResponseObj.ResponseXMLString = responseStr;
