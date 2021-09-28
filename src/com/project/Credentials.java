@@ -59,7 +59,7 @@ public class Credentials {
 			put("DEV04_PASSWORD", "Welcome@1234");
 			
 			put("DEV01_USERNAME", "nidhi.sharma@dev1.com");
-			put("DEV01_PASSWORD", "Welcome@1234");
+			put("DEV01_PASSWORD", "Welcome@123");
 			
 			put("DS3_USERNAME", "hitesh.gupta@bptest.com");
 			put("DS3_PASSWORD", "Welcome@1234");

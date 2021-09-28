@@ -312,6 +312,9 @@ public class BRPService implements Serializable {
 		public String DealerId;
 		public String SFUsername;
 		public String SFPassword;
+		public String ExportType;
+		public String DateTimeValue;
+		public Boolean IsRetryFilePosting;
 	}
 	
 	public class PostResponseWrapper implements java.io.Serializable  {
