@@ -102,6 +102,8 @@ public class BRPService implements Serializable {
 			System.out.println("Payload created");
 			String requestbody = new String(Files.readAllBytes(Paths.get(brpFileDetailObj.FileName)));
 			doPostToBRP(requestbody);
+			throw new Exception("Failed to deliver synchronous message: senderChannel Catching exception calling messaging system: XIServer:CX_ID_PLSRV");
+
 		} catch (Exception e) {
 			brpResponseObj.ErrorResponse = e.getMessage();
 			brpResponseObj.IsJavaSuccess = false;
